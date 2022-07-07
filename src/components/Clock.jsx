@@ -4,12 +4,12 @@ import "dayjs/locale/fr"
 
 export default function Clock() {
   const [date, setDate] = useState(
-    dayjs.locale("fr").format("DDDD DD MMMM YYYY")
+    dayjs().locale("fr").format("dddd DD MMMM YYYY HH:mm:ss")
   )
 
   useEffect(() => {
     const clock = setInterval(() => {
-      setDate(dayjs().locale("fr").format("DDDD DD MMMM YYYY"))
+      setDate(dayjs().locale("fr").format("dddd DD MMMM YYYY HH:mm:ss"))
     }, 1000)
     return () => {
       clearInterval(clock)
