@@ -1,15 +1,13 @@
 import { useState, useEffect } from "react"
-import dayjs from "dayjs"
-import "dayjs/locale/fr"
+
+import { formatDate } from "../services/formatDate"
 
 export default function Clock() {
-  const [date, setDate] = useState(
-    dayjs().locale("fr").format("dddd DD MMMM YYYY HH:mm:ss")
-  )
+  const [date, setDate] = useState(formatDate())
 
   useEffect(() => {
     const clock = setInterval(() => {
-      setDate(dayjs().locale("fr").format("dddd DD MMMM YYYY HH:mm:ss"))
+      setDate(formatDate())
     }, 1000)
     return () => {
       clearInterval(clock)
