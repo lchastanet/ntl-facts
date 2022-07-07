@@ -1,19 +1,20 @@
-import {useState, useEffect} from 'react'
-import moment from 'moment-with-locales-es6'
+import { useState, useEffect } from "react"
+import dayjs from "dayjs"
+import "dayjs/locale/fr"
 
 export default function Clock() {
-  const [date, setDate] = useState(moment().locale("fr").format("ll LTS"))
+  const [date, setDate] = useState(
+    dayjs.locale("fr").format("DDDD DD MMMM YYYY")
+  )
 
   useEffect(() => {
     const clock = setInterval(() => {
-      setDate(moment().locale("fr").format("ll LTS"))
+      setDate(dayjs().locale("fr").format("DDDD DD MMMM YYYY"))
     }, 1000)
     return () => {
-        clearInterval(clock)
+      clearInterval(clock)
     }
   }, [])
 
-  return (
-    <div>{date.toString()}</div>
-  )
+  return <div>{date.toString()}</div>
 }
