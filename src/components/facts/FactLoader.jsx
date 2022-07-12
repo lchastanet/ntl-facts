@@ -1,18 +1,13 @@
-import axios from 'axios'
-import { useState, useEffect } from 'react'
+import FactCard from "./FactCard"
 
-import FactCard from './FactCard'
+import { useAxios } from "../../hooks/useAxios"
 
 export default function FactLoader({ type }) {
-    const [item, setItem] = useState(null)
+  const typeString = type.toLowerCase()
 
-    const typeString = type.toLowerCase()
+  const { data, error, loader, loaderTemplate } = useAxios(
+    `https://some-random-api.ml/animal/${typeString}`
+  )
 
-    useEffect(() => {
-      axios.get(`https://some-random-api.ml/animal/${typeString}`)
-              .then(res => res.data)
-              .then(data => setItem(data))
-    }, [typeString])
-
-  return (<>{item && <FactCard item={item} />}</>)
+  return <>{loader ? loaderTemplate : !error && <FactCard item={data} />}</>
 }
